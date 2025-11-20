@@ -36,5 +36,11 @@ services:
     ports:
       - "8080:8080"
 
+
+
+#서비스에서 사용한 볼륨 이름을 실제로 정의해주는 부분
+#서비스 부분에서 이미 db_data:/var/lib/postgresql/data라고 썼지만, 
+#그건 "이름만 참조한 것"이고, 아래 volumes: 섹션에서 그 이름을 실제로 만들어주는 역할이 밑이부분
+
 volumes:
   db_data:
