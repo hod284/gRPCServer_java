@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:16
+    container_name: db
+    environment:
+      POSTGRES_DB: plate_db
+      POSTGRES_USER: plate_user
+      POSTGRES_PASSWORD: plate_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U plate_user -d plate_db"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  spring-app:
+    image: hod284/grpcgit-actions:latest    # 여기에 네 스프링 Dockerfile 있음
+    container_name: spring-app
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/plate_db
+      SPRING_DATASOURCE_USERNAME: plate_user
+      SPRING_DATASOURCE_PASSWORD: plate_pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+      # 파이썬 gRPC 서버 주소/포트 (밖에 따로 떠 있으니까)
+      GRPC_HOST: host.docker.internal   # 또는 파이썬 서버 IP/도메인
+      GRPC_PORT: "50051"
+    ports:
+      - "8080:8080"
+
+volumes:
+  db_data:

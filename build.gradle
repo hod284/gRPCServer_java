@@ -1,0 +1,77 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.5.7'
+	id 'io.spring.dependency-management' version '1.1.7'
+    id 'com.google.protobuf' version '0.9.4'  // gRPC 코드 생성 플러그인
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+description = 'Demo project for Spring Boot'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+def grpcVersion = '1.66.0'
+def protobufVersion = '3.25.1'
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    // gRPC 런타임
+    implementation "io.grpc:grpc-netty-shaded:${grpcVersion}"
+    implementation "io.grpc:grpc-protobuf:${grpcVersion}"
+    implementation "io.grpc:grpc-stub:${grpcVersion}"
+    // @Generated 같은 어노테이션 때문에 가끔 필요
+    compileOnly "org.apache.tomcat:annotations-api:6.0.53"
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	runtimeOnly 'com.h2database:h2'
+    runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
+protobuf {
+    protoc {
+        // protoc 컴파일러
+        artifact = "com.google.protobuf:protoc:${protobufVersion}"
+    }
+    plugins {
+        // gRPC용 자바 코드 생성 플러그인
+        grpc {
+            artifact = "io.grpc:protoc-gen-grpc-java:${grpcVersion}"
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                grpc {}   // 각 proto에 대해 gRPC 코드도 같이 생성
+            }
+        }
+    }
+    // (sourceSets 설정은 플러그인이 알아서 해줘서 보통 따로 안 건드려도 됨)
+}
+tasks.named('jar') {
+    enabled = false
+}
+
+bootJar {
+    archiveFileName = "app.jar"
+}

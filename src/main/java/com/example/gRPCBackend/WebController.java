@@ -1,0 +1,64 @@
+package com.example.gRPCBackend;
+
+
+import com.google.protobuf.ByteString;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import plate.PlateRecognizerOuterClass;
+import java.io.IOException;
+
+@Slf4j
+@RestController
+@RequestMapping("/api")
+public class WebController {
+
+    private  ServiceLogic Slogic;
+
+    public   WebController(ServiceLogic Serlogic) {
+        Slogic = Serlogic;
+    }
+
+
+    @GetMapping("/{Lplate}")
+    public ResponseEntity<RepositryDTO> GetDriverInformation(@PathVariable("Lplate") String Licenseplate){
+        RepositryDTO  re = Slogic.FindInformation(Licenseplate);
+        log.info(re.toString());
+         if(re == null){
+             return ResponseEntity.notFound().build();
+         }
+        return   ResponseEntity.ok(re);
+    }
+
+    @PostMapping("/CreateData")
+    public ResponseEntity<RepositryDTO> CreateData(@RequestBody RepositryDTO repo){
+        Slogic.UpdateDate(repo);
+        log.info("생성 요청" );
+        // 웹한테 성공했다고 보내주는 것
+        return ResponseEntity.ok().build();
+    }
+    @PatchMapping("/PathchDate")
+    public ResponseEntity<RepositryDTO> UpdateData(@RequestBody RepositryDTO repo)
+    {
+        Slogic.PatchData(repo);
+        log.info("수정 요청" );
+        // 웹한테 성공했다고 보내주는 것
+        return   ResponseEntity.ok().build();
+    }
+    @PostMapping("/Sendthimage")
+    public PlateResultDto SendThImage(@RequestParam("image")MultipartFile image , @RequestParam("mode") String Mode) throws IOException
+    {
+        byte[] bytes = image.getBytes();
+        //.proto파일에 에 있는 메세지중에 보내는 클래스를 부름
+        //PlateRecognizerOuterClass는 .proto파일을 빌드하면 생겨나는 클래스로 당황하지 마세요
+        PlateRecognizerOuterClass.PlateRequest  request = PlateRecognizerOuterClass.PlateRequest.newBuilder()
+                .setImage(ByteString.copyFrom(bytes)).setMode(PlateRecognizerOuterClass.RecognizeMode.valueOf("MODE_"+Mode.toUpperCase())).build();
+        PlateRecognizerOuterClass.PlateResponse response = Slogic.Recongize(bytes,request.getMode().toString());
+        log.info(response.toString());
+        log.info("gRPC요청" );
+        return new PlateResultDto(
+                response.getPlateNumber()
+        );
+    }
+}
