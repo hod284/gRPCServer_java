@@ -21,14 +21,14 @@ public class RepositryManager {
    {
        log.info("DB 업데이트");
         String sql = "INSERT INTO Carinformation (LicensePlate,BadPoint,DrivateOwner) VALUES (?,?,?)";
-        JdbcTem.update(sql,repo.getLicensePlate(),repo.getBadPoint(),repo.getDrivateOwner());
+        JdbcTem.update(sql,repo.getLicensePlate(),repo.getBadPoint(),repo.getDriveOwner());
    }
 
    public void UpdatetheInfotoDB(RepositryDTO repo)
    {
        log.info("DB 새로운 정보 추가");
         String sql = "INSERT  Carinformation SET LicensePlate = ?,BadPoint = ?,DrivateOwner = ?)";
-        JdbcTem.update(sql,repo.getLicensePlate(),repo.getBadPoint(),repo.getDrivateOwner());
+        JdbcTem.update(sql,repo.getLicensePlate(),repo.getBadPoint(),repo.getDriveOwner());
    }
 
    public RepositryDTO SendtheInfotoClient( String LicenseplateNumber)
@@ -44,7 +44,7 @@ public class RepositryManager {
         return new RepositryDTO(
                 rs.getString("LicensePlate"),
                 rs.getLong("BadPoint"),
-                rs.getString("DrivateOwner")
+                rs.getString("DriveOwner")
         );
    }
 }

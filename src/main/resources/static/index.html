@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: row;   /* 기본값이라 안 써도 됨 */
+            flex-wrap: nowrap;     /* 줄 바꿈 방지 (오른쪽이 아래로 내려가는 거 방지) */
+            gap: 20px;
+        }
+
+        .left {
+            flex: 2;               /* 왼쪽 영역을 좀 더 넓게 */
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .right {
+            flex: 1;
+            max-width: 300px;      /* 너무 넓어지지 않게 */
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        #preview {
+            max-width: 100%;
+            max-height: 300px;
+            display: none;
+            margin-top: 10px;
+        }
+
+        .sql-block {
+            border: 1px solid #ddd;
+            padding: 5px;
+            margin-bottom: 8px;
+        }
+
+        .sql-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .sql-toggle-btn {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+
+        .sql-panel {
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- 왼쪽 -->
+    <div class="left">
+        <h3>모드 선택</h3>
+        <label><input type="radio" name="mode" value="0" checked> opencv+ocr</label>
+        <label><input type="radio" name="mode" value="1"> opencv</label>
+        <label><input type="radio" name="mode" value="2"> ocr</label>
+
+        <h3>이미지 선택</h3>
+        <input id="imageInput" type="file" accept="image/*"/>
+        <br>
+        <img id="preview" alt="이미지 미리보기"/>
+        <br>
+        <button id="sendBtn">이미지 + 모드 전송</button>
+    </div>
+
+    <!-- 오른쪽 -->
+    <div class="right">
+        <h3>SQL 패널</h3>
+
+        <div class="sql-block">
+            <div class="sql-header">
+                SQL 1
+                <button class="sql-toggle-btn" data-target="sql-panel-1">&gt;</button>
+            </div>
+            <div id="sql-panel-1" class="sql-panel">
+                <input type="number" class="sql-number1" placeholder="번호 입력">
+                <button class="sql-send-btn_get">보내기</button>
+            </div>
+        </div>
+
+        <div class="sql-block">
+            <div class="sql-header">
+                SQL 2
+                <button class="sql-toggle-btn" data-target="sql-panel-2">&gt;</button>
+            </div>
+            <div id="sql-panel-2" class="sql-panel">
+                <input type="number" class="sql-number21" placeholder="번호 입력">
+                <input type="Point" class="sql-number22" placeholder="점수 입력">
+                <input type="Driver" class="sql-number23" placeholder="운전자">
+                <button class="sql-send-btn_post">보내기</button>
+            </div>
+        </div>
+
+        <div class="sql-block">
+            <div class="sql-header">
+                SQL 3
+                <button class="sql-toggle-btn" data-target="sql-panel-3">&gt;</button>
+            </div>
+            <div id="sql-panel-3" class="sql-panel">
+                <input type="number" class="sql-number31" placeholder="번호 입력">
+                <input type="Point" class="sql-number32" placeholder="점수 입력">
+                <input type="Driver" class="sql-number33" placeholder="운전자">
+                <button class="sql-send-btn_patch">보내기</button>
+            </div>
+        </div>
+    </div>
+    <div id="ResultView"> </div>
+</div>
+<script src="/TypeScript/main.js">
+
+</script>
+</body>
+</html>

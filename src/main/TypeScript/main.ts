@@ -1,0 +1,201 @@
+let selectMode: number =0;
+let selectFile: File | null = null;
+
+window.addEventListener("DONContentloaded",() =>{
+   const ModeRadio = document.querySelectorAll<HTMLInputElement>('input[name="mode"]');
+   const ImageInput = document.getElementById("imageInput") as HTMLInputElement;
+   const previewImg = document.getElementById("preview") as HTMLInputElement;
+   const sendbtn = document.getElementById("sendBtn") as HTMLButtonElement;
+
+   ModeRadio.forEach( radio =>{
+       radio.addEventListener("change",()=>{
+           if(radio.checked)
+           {
+               selectMode = parseInt(radio.value,10);
+               console.log("선택한 모드",selectMode);
+           }
+       })
+   });
+
+   ImageInput.addEventListener("change",() =>{
+       const files = ImageInput.files;
+       if(!files || files.length === 0)
+       {
+           selectFile = null;
+           previewImg.src = "";
+           previewImg.style.display = "none";
+           return;
+       }
+       selectFile = files[0];
+       const render = new FileReader();
+       render.onload =()=>{
+           previewImg.src = render.result as string;
+           previewImg.style.display ="block";
+       }
+       render.readAsDataURL(selectFile);
+    });
+
+   sendbtn.addEventListener("click",async ()=>{
+       if(!selectFile) {
+           alert("이미지를 먼저 선택하세요");
+           return;
+       }
+       const formdata = new FormData();
+       formdata.append("image", selectFile);
+       formdata.append("mode", selectMode.toString());
+
+       try
+       {
+           // 같은 도메인이라서 주소를 안집어 넣고 그냥 URL만으로 충분하다
+           const res =await fetch("api/DiskImage", {
+               method : "POST",
+               body: formdata
+           });
+           if(!res.ok)
+           {
+               throw new Error(await res.text());
+           }
+       }
+       catch (e)
+       {
+           console.log(e);
+           alert("전송 실패"+e);
+       }
+   });
+
+   const toggleButtons = document.querySelectorAll<HTMLInputElement>(".sql-toggle-btn");
+
+   toggleButtons.forEach(btn =>{
+       // dataset.target으로 어떤 버튼을 눌렀는지 알수 있음
+       const targetid = btn.dataset.target;
+       if(!targetid)
+       {
+           console.log(targetid+"없습니다");
+           return;
+       }
+       const pannel = document.getElementById(targetid) as HTMLDivElement;
+       btn.addEventListener( "click",()=>{
+           const hidden = pannel.style.display === "none" || pannel.style.display === "";
+           pannel.style.display= hidden?"block": "none";
+       });
+   });
+
+   const sqlSendButtons_get = document.getElementById("sql-send-btn_get") as HTMLButtonElement;
+   sqlSendButtons_get.addEventListener("click", async () =>{
+       const input = document.getElementById("sql-number1") as HTMLInputElement;
+       const rv = document.getElementById("ResultView") as HTMLElement;
+       if(!input.value != null)
+       {
+           alert("번호를 입력하세요");
+           return;
+       }
+       try
+       {
+           const res =await fetch(`/api/${input.value}`);
+           const data = await res.json();
+           console.log("받은 데이터:", data);
+           rv.innerHTML = `
+                <h3>${data.LicensePlate}</h3>
+                <p>${data.BadPoint}</p>
+                <p>${data.DrivateOwner}</p>
+            `;
+       }
+       catch (e)
+       {
+          console.log(e);
+          alert("get요청 실패");
+       }
+   });
+
+    const sqlSendButtons_Post = document.getElementById("sql-send-btn_post") as HTMLButtonElement;
+    sqlSendButtons_Post.addEventListener("click", async () =>{
+        const input1 = document.getElementById("sql-number21") as HTMLInputElement;
+        const input2 = document.getElementById("sql-number22") as HTMLInputElement;
+        const input3 = document.getElementById("sql-number23") as HTMLInputElement;
+        if(!input1.value != null)
+        {
+            alert("번호를 입력하세요");
+            return;
+        }
+        if(!input2.value != null)
+        {
+            alert("점수를 입력하세요");
+            return;
+        }
+        if(!input3.value != null)
+        {
+            alert("운전자명을 입력하세요");
+            return;
+        }
+        try
+        {
+            const body = {
+                LicensePlate : input1.value,
+                BadPoint : input2.value,
+                DriveOwner : input3.value
+            };
+            const res =await fetch(`/api/CreateData`, {
+                method : "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+            if(!res.ok)
+            {
+                throw new Error(await res.text());
+            }
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("post요청 실패");
+        }
+    });
+
+    const sqlSendButtons_patch = document.getElementById("sql-send-btn_patch") as HTMLButtonElement;
+    sqlSendButtons_patch.addEventListener("click", async () =>{
+        const input1 = document.getElementById("sql-number31") as HTMLInputElement;
+        const input2 = document.getElementById("sql-number32") as HTMLInputElement;
+        const input3 = document.getElementById("sql-number33") as HTMLInputElement;
+        if(!input1.value != null)
+        {
+            alert("번호를 입력하세요");
+            return;
+        }
+        if(!input2.value != null)
+        {
+            alert("점수를 입력하세요");
+            return;
+        }
+        if(!input3.value != null)
+        {
+            alert("운전자명을 입력하세요");
+            return;
+        }
+        try
+        {
+            const body = {
+                LicensePlate : input1.value,
+                BadPoint : input2.value,
+                DriveOwner : input3.value
+            };
+            const res =await fetch(`/api/PatchDate`, {
+                method : "PATCH",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(body)
+            });
+            if(!res.ok)
+            {
+                throw new Error(await res.text());
+            }
+        }
+        catch (e)
+        {
+            console.log(e);
+            alert("patch요청 실패");
+        }
+    });
+});
+
+
+
+

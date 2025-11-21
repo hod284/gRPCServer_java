@@ -38,7 +38,7 @@ public class WebController {
         // 웹한테 성공했다고 보내주는 것
         return ResponseEntity.ok().build();
     }
-    @PatchMapping("/PathchDate")
+    @PatchMapping("/PatchDate")
     public ResponseEntity<RepositryDTO> UpdateData(@RequestBody RepositryDTO repo)
     {
         Slogic.PatchData(repo);
@@ -46,7 +46,7 @@ public class WebController {
         // 웹한테 성공했다고 보내주는 것
         return   ResponseEntity.ok().build();
     }
-    @PostMapping("/Sendthimage")
+    @PostMapping("/DiskImage")
     public PlateResultDto SendThImage(@RequestParam("image")MultipartFile image , @RequestParam("mode") String Mode) throws IOException
     {
         byte[] bytes = image.getBytes();

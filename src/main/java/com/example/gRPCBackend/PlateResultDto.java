@@ -7,7 +7,8 @@ import lombok.Setter;
 @Setter
 public class PlateResultDto {
    private String lincensePlate;
-   public PlateResultDto(String lPlate) {
+   public PlateResultDto(String lPlate)
+   {
        lincensePlate = lPlate;
    }
 }
