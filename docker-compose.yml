@@ -5,6 +5,7 @@ services:
     image: postgres:16
     container_name: db
     environment:
+      TZ: Asia/Seoul
       POSTGRES_DB: plate_db
       POSTGRES_USER: plate_user
       POSTGRES_PASSWORD: plate_pass
@@ -25,6 +26,7 @@ services:
       db:
         condition: service_healthy
     environment:
+      TZ: Asia/Seoul
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/plate_db
       SPRING_DATASOURCE_USERNAME: plate_user
       SPRING_DATASOURCE_PASSWORD: plate_pass
