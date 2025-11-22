@@ -8,6 +8,21 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: plate_user
+          POSTGRES_PASSWORD: plate_pass
+          POSTGRES_DB: plate_db
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd="pg_isready -U plate_user -d plate_db"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
     steps:
       - uses: actions/checkout@v3
 
