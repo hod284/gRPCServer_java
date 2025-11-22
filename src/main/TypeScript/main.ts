@@ -5,8 +5,8 @@ window.addEventListener("DONContentloaded",() =>{
    const ModeRadio = document.querySelectorAll<HTMLInputElement>('input[name="mode"]');
    const ImageInput = document.getElementById("imageInput") as HTMLInputElement;
    const previewImg = document.getElementById("preview") as HTMLInputElement;
-   const sendbtn = document.getElementById("sendBtn") as HTMLButtonElement;
-
+   const Sendbtn = document.getElementById("sendBtn") as HTMLButtonElement;
+    const rv = document.getElementById("ResultView") as HTMLElement;
    ModeRadio.forEach( radio =>{
        radio.addEventListener("change",()=>{
            if(radio.checked)
@@ -35,7 +35,7 @@ window.addEventListener("DONContentloaded",() =>{
        render.readAsDataURL(selectFile);
     });
 
-   sendbtn.addEventListener("click",async ()=>{
+    Sendbtn.addEventListener("click",async ()=>{
        if(!selectFile) {
            alert("이미지를 먼저 선택하세요");
            return;
@@ -55,6 +55,11 @@ window.addEventListener("DONContentloaded",() =>{
            {
                throw new Error(await res.text());
            }
+           const data = await res.json();
+           console.log("파이썬 인식 결과:", data);
+           rv.innerHTML = `
+                <h3>${data.LicensePlate}</h3>
+            `;
        }
        catch (e)
        {
