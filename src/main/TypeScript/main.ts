@@ -1,7 +1,7 @@
 let selectMode: number =0;
 let selectFile: File | null = null;
 
-window.addEventListener("DONContentloaded",() =>{
+window.addEventListener("DOMContentLoaded",() =>{
    const ModeRadio = document.querySelectorAll<HTMLInputElement>('input[name="mode"]');
    const ImageInput = document.getElementById("imageInput") as HTMLInputElement;
    const previewImg = document.getElementById("preview") as HTMLInputElement;

@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 let selectMode = 0;
 let selectFile = null;
-window.addEventListener("DONContentloaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
     const ModeRadio = document.querySelectorAll('input[name="mode"]');
     const ImageInput = document.getElementById("imageInput");
     const previewImg = document.getElementById("preview");
