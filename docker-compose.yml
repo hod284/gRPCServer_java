@@ -5,6 +5,7 @@ services:
     image: postgres:16
     container_name: db
     environment:
+      restart : unless-stopped
       TZ: Asia/Seoul
       POSTGRES_DB: plate_db
       POSTGRES_USER: plate_user

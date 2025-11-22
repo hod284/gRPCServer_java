@@ -11,6 +11,9 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - name :  Gradlew build
+        run : ./gradlew build
+
       - name: Docker build
         run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/grpcgit-actions .
 
