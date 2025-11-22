@@ -73,6 +73,7 @@ window.addEventListener("DONContentloaded",() =>{
    toggleButtons.forEach(btn =>{
        // dataset.target으로 어떤 버튼을 눌렀는지 알수 있음
        const targetid = btn.dataset.target;
+
        if(!targetid)
        {
            console.log(targetid+"없습니다");
