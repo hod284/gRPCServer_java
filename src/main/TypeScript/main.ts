@@ -100,7 +100,7 @@ let selectFile: File | null = null;
            const res =await fetch(`/api/${input.value}`);
            const data = await res.json();
            console.log("받은 데이터:", data);
-           if(data.license_plate === null || data.license_plate.value ==="")
+           if(data.license_plate.value === null || data.license_plate.value ==="")
            {
                alert("번호판 데이터가 없습니다");
            }
@@ -147,12 +147,18 @@ sqlSendButtonslist.addEventListener("click", async () =>{
     {
         const res =await fetch(`/api/listall`);
         const data = await res.json();
-        data.forEach( plates => {
-            const li = document.createElement("li") as HTMLElement;
-             li.textContent = plates;
-            const rv = document.getElementById("ResultView") as HTMLElement;
-            rv.appendChild(li);
-        });
+        if(data.length>0) {
+            data.forEach(plates => {
+                const li = document.createElement("li") as HTMLElement;
+                li.textContent = plates;
+                const rv = document.getElementById("ResultView") as HTMLElement;
+                rv.appendChild(li);
+            });
+        }
+        else
+        {
+            alert("리스트 없음");
+        }
         if(!res.ok)
         {
             throw new Error(await res.text());
@@ -165,7 +171,7 @@ sqlSendButtonslist.addEventListener("click", async () =>{
     catch (e)
     {
         console.log(e);
-        alert("리스트 실패 실패");
+        alert("리스트 실패");
     }
 });
     const sqlSendButtons_Post = document.getElementById("sql-send-btn_post") as HTMLButtonElement;

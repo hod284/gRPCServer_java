@@ -92,7 +92,7 @@ sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 
         const res = yield fetch(`/api/${input.value}`);
         const data = yield res.json();
         console.log("받은 데이터:", data);
-        if (data.license_plate === null || data.license_plate.value === "") {
+        if (data.license_plate.value === null || data.license_plate.value === "") {
             alert("번호판 데이터가 없습니다");
         }
         else {
@@ -131,12 +131,17 @@ sqlSendButtonslist.addEventListener("click", () => __awaiter(this, void 0, void 
     try {
         const res = yield fetch(`/api/listall`);
         const data = yield res.json();
-        data.forEach(plates => {
-            const li = document.createElement("li");
-            li.textContent = plates;
-            const rv = document.getElementById("ResultView");
-            rv.appendChild(li);
-        });
+        if (data.length > 0) {
+            data.forEach(plates => {
+                const li = document.createElement("li");
+                li.textContent = plates;
+                const rv = document.getElementById("ResultView");
+                rv.appendChild(li);
+            });
+        }
+        else {
+            alert("리스트 없음");
+        }
         if (!res.ok) {
             throw new Error(yield res.text());
         }
@@ -146,7 +151,7 @@ sqlSendButtonslist.addEventListener("click", () => __awaiter(this, void 0, void 
     }
     catch (e) {
         console.log(e);
-        alert("리스트 실패 실패");
+        alert("리스트 실패");
     }
 }));
 const sqlSendButtons_Post = document.getElementById("sql-send-btn_post");

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import plate.PlateRecognizerOuterClass;
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -54,11 +55,11 @@ public class WebController {
         return   ResponseEntity.ok().build();
     }
     @GetMapping("/listall")
-    public ResponseEntity<String> PlateAllData()
+    public ResponseEntity<List<String>> PlateAllData()
     {
-        Slogic.listData();
+        List<String> re =  Slogic.listData();
         log.info("번호판 모든 데이터 요청");
-        return   ResponseEntity.ok().build();
+        return   ResponseEntity.ok(re);
     }
     @PostMapping("/DiskImage")
     public PlateResultDto SendThImage(@RequestParam("image")MultipartFile image , @RequestParam("mode") String Mode) throws IOException

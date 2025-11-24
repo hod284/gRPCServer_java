@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import plate.PlateRecognizerGrpc;
 import plate.PlateRecognizerOuterClass;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class ServiceLogic {
@@ -56,8 +58,8 @@ public class ServiceLogic {
          RepoManager.ClearDB();
     }
     @Transactional
-    public void listData()
+    public List<String> listData()
     {
-        RepoManager.getListDB();
+       return  RepoManager.getListDB();
     }
 }
