@@ -100,9 +100,9 @@ let selectFile: File | null = null;
            const data = await res.json();
            console.log("받은 데이터:", data);
            rv.innerHTML = `
-                <h3>${data.LicensePlate}</h3>
-                <p>${data.BadPoint}</p>
-                <p>${data.DriveOwner}</p>
+                <h2>번호판: ${data.license_plate}</h2>
+                <h2>벌점 :${data.bad_point}</h2>
+                <h2>운전자: ${data.driver_owner}</h2>
             `;
        }
        catch (e)
