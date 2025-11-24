@@ -149,6 +149,10 @@ let selectFile: File | null = null;
             {
                 throw new Error(await res.text());
             }
+            else
+            {
+                alert("post완료");
+            }
         }
         catch (e)
         {
@@ -193,6 +197,10 @@ let selectFile: File | null = null;
             if(!res.ok)
             {
                 throw new Error(await res.text());
+            }
+            else
+            {
+                alert("patch완료");
             }
         }
         catch (e)

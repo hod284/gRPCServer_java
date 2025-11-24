@@ -134,6 +134,9 @@ sqlSendButtons_Post.addEventListener("click", () => __awaiter(this, void 0, void
         if (!res.ok) {
             throw new Error(yield res.text());
         }
+        else {
+            alert("post완료");
+        }
     }
     catch (e) {
         console.log(e);
@@ -171,6 +174,9 @@ sqlSendButtons_patch.addEventListener("click", () => __awaiter(this, void 0, voi
         });
         if (!res.ok) {
             throw new Error(yield res.text());
+        }
+        else {
+            alert("patch완료");
         }
     }
     catch (e) {
