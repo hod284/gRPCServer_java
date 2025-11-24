@@ -58,7 +58,7 @@ let selectFile: File | null = null;
            const data = await res.json();
            console.log("파이썬 인식 결과:", data);
            const pn = document.getElementById("platenumber");
-           pn.textContent = '번호판 : ${data.licensePlate}';
+           pn.textContent = `번호판 : ${data.licensePlate}`;
        }
        catch (e)
        {
@@ -102,7 +102,7 @@ let selectFile: File | null = null;
            rv.innerHTML = `
                 <h3>${data.LicensePlate}</h3>
                 <p>${data.BadPoint}</p>
-                <p>${data.DrivateOwner}</p>
+                <p>${data.DriveOwner}</p>
             `;
        }
        catch (e)
