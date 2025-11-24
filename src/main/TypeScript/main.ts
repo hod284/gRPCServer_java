@@ -100,22 +100,16 @@ let selectFile: File | null = null;
            const res =await fetch(`/api/${input.value}`);
            const data = await res.json();
            console.log("받은 데이터:", data);
-           if(data.license_plate.value === null || data.license_plate.value ==="")
-           {
-               rv.innerHTML = `<h2>데이터가 없습니다 </h2>>`;
-           }
-           else {
-               rv.innerHTML = `
+           rv.innerHTML = `
                 <h2>번호판: ${data.license_plate}</h2>
                 <h2>벌점 :${data.bad_point}</h2>
                 <h2>운전자: ${data.driver_owner}</h2>
             `;
-           }
        }
        catch (e)
        {
           console.log(e);
-          alert("get요청 실패");
+          alert("get요청 실패 데이터가 없음");
        }
    });
 
@@ -157,10 +151,7 @@ sqlSendButtonslist.addEventListener("click", async () =>{
         }
         else
         {
-            const li = document.createElement("li") as HTMLElement;
-            li.textContent = "리스트 없음";
-            const rv = document.getElementById("ResultView") as HTMLElement;
-            rv.appendChild(li);
+            rv.innerHTML = `<h2>리스트 없음 </h2>>`;
         }
         if(!res.ok)
         {
