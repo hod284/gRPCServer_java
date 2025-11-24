@@ -96,6 +96,7 @@ let selectFile: File | null = null;
        }
        try
        {
+           rv.innerHTML="";
            const res =await fetch(`/api/${input.value}`);
            const data = await res.json();
            console.log("받은 데이터:", data);

@@ -88,6 +88,7 @@ sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 
         return;
     }
     try {
+        rv.innerHTML = "";
         const res = yield fetch(`/api/${input.value}`);
         const data = yield res.json();
         console.log("받은 데이터:", data);
