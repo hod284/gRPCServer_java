@@ -107,24 +107,25 @@ sqlSendButtons_Post.addEventListener("click", () => __awaiter(this, void 0, void
     const input1 = document.getElementById("sql-number21");
     const input2 = document.getElementById("sql-number22");
     const input3 = document.getElementById("sql-number23");
-    if (!input1.value == null) {
+    if (input1.value === null || input1.value.trim() === "") {
         alert("번호를 입력하세요");
         return;
     }
-    if (!input2.value == null) {
+    if (input2.value === null || input1.value.trim() === "") {
         alert("점수를 입력하세요");
         return;
     }
-    if (!input3.value == null) {
+    if (input3.value === null || input1.value.trim() === "") {
         alert("운전자명을 입력하세요");
         return;
     }
     try {
         const body = {
-            LicensePlate: input1.value,
-            BadPoint: input2.value,
-            DriveOwner: input3.value
+            LicensePlate: input1.value.trim(),
+            BadPoint: input2.value.trim(),
+            DriveOwner: input3.value.trim()
         };
+        console.log(body);
         const res = yield fetch(`/api/CreateData`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
