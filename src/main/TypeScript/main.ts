@@ -89,7 +89,7 @@ let selectFile: File | null = null;
    sqlSendButtons_get.addEventListener("click", async () =>{
        const input = document.getElementById("sql-number1") as HTMLInputElement;
        const rv = document.getElementById("ResultView") as HTMLElement;
-       if(!input.value != null)
+       if(!input.value == null)
        {
            alert("번호를 입력하세요");
            return;
@@ -117,17 +117,17 @@ let selectFile: File | null = null;
         const input1 = document.getElementById("sql-number21") as HTMLInputElement;
         const input2 = document.getElementById("sql-number22") as HTMLInputElement;
         const input3 = document.getElementById("sql-number23") as HTMLInputElement;
-        if(!input1.value != null)
+        if(!input1.value == null)
         {
             alert("번호를 입력하세요");
             return;
         }
-        if(!input2.value != null)
+        if(!input2.value == null)
         {
             alert("점수를 입력하세요");
             return;
         }
-        if(!input3.value != null)
+        if(!input3.value == null)
         {
             alert("운전자명을 입력하세요");
             return;
@@ -161,17 +161,17 @@ let selectFile: File | null = null;
         const input1 = document.getElementById("sql-number31") as HTMLInputElement;
         const input2 = document.getElementById("sql-number32") as HTMLInputElement;
         const input3 = document.getElementById("sql-number33") as HTMLInputElement;
-        if(!input1.value != null)
+        if(!input1.value == null)
         {
             alert("번호를 입력하세요");
             return;
         }
-        if(!input2.value != null)
+        if(!input2.value == null)
         {
             alert("점수를 입력하세요");
             return;
         }
-        if(!input3.value != null)
+        if(!input3.value == null)
         {
             alert("운전자명을 입력하세요");
             return;

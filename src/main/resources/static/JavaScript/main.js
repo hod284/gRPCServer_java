@@ -83,7 +83,7 @@ const sqlSendButtons_get = document.getElementById("sql-send-btn_get");
 sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
     const input = document.getElementById("sql-number1");
     const rv = document.getElementById("ResultView");
-    if (!input.value != null) {
+    if (!input.value == null) {
         alert("번호를 입력하세요");
         return;
     }
@@ -107,15 +107,15 @@ sqlSendButtons_Post.addEventListener("click", () => __awaiter(this, void 0, void
     const input1 = document.getElementById("sql-number21");
     const input2 = document.getElementById("sql-number22");
     const input3 = document.getElementById("sql-number23");
-    if (!input1.value != null) {
+    if (!input1.value == null) {
         alert("번호를 입력하세요");
         return;
     }
-    if (!input2.value != null) {
+    if (!input2.value == null) {
         alert("점수를 입력하세요");
         return;
     }
-    if (!input3.value != null) {
+    if (!input3.value == null) {
         alert("운전자명을 입력하세요");
         return;
     }
@@ -144,15 +144,15 @@ sqlSendButtons_patch.addEventListener("click", () => __awaiter(this, void 0, voi
     const input1 = document.getElementById("sql-number31");
     const input2 = document.getElementById("sql-number32");
     const input3 = document.getElementById("sql-number33");
-    if (!input1.value != null) {
+    if (!input1.value == null) {
         alert("번호를 입력하세요");
         return;
     }
-    if (!input2.value != null) {
+    if (!input2.value == null) {
         alert("점수를 입력하세요");
         return;
     }
-    if (!input3.value != null) {
+    if (!input3.value == null) {
         alert("운전자명을 입력하세요");
         return;
     }
