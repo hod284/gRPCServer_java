@@ -50,11 +50,10 @@ public class WebController {
     public PlateResultDto SendThImage(@RequestParam("image")MultipartFile image , @RequestParam("mode") String Mode) throws IOException
     {
         byte[] bytes = image.getBytes();
+        int mode = Integer.parseInt(Mode);
         //.proto파일에 에 있는 메세지중에 보내는 클래스를 부름
         //PlateRecognizerOuterClass는 .proto파일을 빌드하면 생겨나는 클래스로 당황하지 마세요
-        PlateRecognizerOuterClass.PlateRequest  request = PlateRecognizerOuterClass.PlateRequest.newBuilder()
-                .setImage(ByteString.copyFrom(bytes)).setMode(PlateRecognizerOuterClass.RecognizeMode.valueOf("MODE_"+Mode.toUpperCase())).build();
-        PlateRecognizerOuterClass.PlateResponse response = Slogic.Recongize(bytes,request.getMode().toString());
+        PlateRecognizerOuterClass.PlateResponse response = Slogic.Recongize(bytes,mode);
         log.info(response.toString());
         log.info("gRPC요청" );
         return new PlateResultDto(

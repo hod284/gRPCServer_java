@@ -24,10 +24,10 @@ public class ServiceLogic {
       RepoManager = RManager;
   }
 
-    public PlateRecognizerOuterClass.PlateResponse Recongize(byte[] bytes, String modestr)
+    public PlateRecognizerOuterClass.PlateResponse Recongize(byte[] bytes, int Mode)
     {
-        PlateRecognizerOuterClass.RecognizeMode mode = PlateRecognizerOuterClass.RecognizeMode.valueOf("MODE_" + modestr.toUpperCase());
-        log.info("Recongize mode " + modestr);
+        PlateRecognizerOuterClass.RecognizeMode mode = PlateRecognizerOuterClass.RecognizeMode.forNumber(Mode);
+        log.info("Recongize mode " + mode);
         PlateRecognizerOuterClass.PlateRequest request = PlateRecognizerOuterClass.PlateRequest.newBuilder()
                 .setImage(ByteString.copyFrom(bytes))
                 .setMode(mode)

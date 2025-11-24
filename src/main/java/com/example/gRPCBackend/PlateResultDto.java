@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PlateResultDto {
-   private String lincensePlate;
+   private String LicensePlate;
    public PlateResultDto(String lPlate)
    {
-       lincensePlate = lPlate;
+       LicensePlate= lPlate;
    }
 }
