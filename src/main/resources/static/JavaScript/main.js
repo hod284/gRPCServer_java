@@ -106,7 +106,9 @@ sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 
 const sqlSendButtons_Removeall = document.getElementById("sql-send-btn_Removeall");
 sqlSendButtons_Removeall.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
     try {
-        const res = yield fetch(`/api/Removeall`);
+        const res = yield fetch(`/api/Removeall`, {
+            method: "DELETE"
+        });
         if (!res.ok) {
             throw new Error(yield res.text());
         }

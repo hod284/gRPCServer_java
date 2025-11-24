@@ -47,7 +47,7 @@ public class WebController {
         return   ResponseEntity.ok().build();
     }
     @DeleteMapping("/Removeall")
-    public ResponseEntity<RepositryDTO> RemoveAllData(@RequestBody RepositryDTO repo)
+    public ResponseEntity<Void> RemoveAllData()
     {
         Slogic.ClearData();
         log.info("DB 초기화 요청");
