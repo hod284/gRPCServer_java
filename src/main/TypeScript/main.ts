@@ -122,12 +122,12 @@ let selectFile: File | null = null;
             alert("번호를 입력하세요");
             return;
         }
-        if(input2.value === null||input1.value.trim() === "")
+        if(input2.value === null||input2.value.trim() === "")
         {
             alert("점수를 입력하세요");
             return;
         }
-        if(input3.value === null||input1.value.trim() === "")
+        if(input3.value === null||input3.value.trim() === "")
         {
             alert("운전자명을 입력하세요");
             return;
@@ -135,9 +135,9 @@ let selectFile: File | null = null;
         try
         {
             const body = {
-                LicensePlate : input1.value.trim(),
-                BadPoint : input2.value.trim(),
-                DriveOwner : input3.value.trim()
+                license_plate : input1.value.trim(),
+                bad_point: input2.value.trim(),
+                driver_owner: input3.value.trim()
             };
             console.log(body);
             const res =await fetch(`/api/CreateData`, {
@@ -162,17 +162,17 @@ let selectFile: File | null = null;
         const input1 = document.getElementById("sql-number31") as HTMLInputElement;
         const input2 = document.getElementById("sql-number32") as HTMLInputElement;
         const input3 = document.getElementById("sql-number33") as HTMLInputElement;
-        if(!input1.value == null)
+        if(input1.value === null||input1.value.trim() === "")
         {
             alert("번호를 입력하세요");
             return;
         }
-        if(!input2.value == null)
+        if(input2.value === null||input2.value.trim() === "")
         {
             alert("점수를 입력하세요");
             return;
         }
-        if(!input3.value == null)
+        if(input3.value === null||input3.value.trim() === "")
         {
             alert("운전자명을 입력하세요");
             return;
@@ -180,10 +180,11 @@ let selectFile: File | null = null;
         try
         {
             const body = {
-                LicensePlate : input1.value,
-                BadPoint : input2.value,
-                DriveOwner : input3.value
+                license_plate : input1.value.trim(),
+                bad_point: input2.value.trim(),
+                driver_owner: input3.value.trim()
             };
+            console.log(body);
             const res =await fetch(`/api/PatchDate`, {
                 method : "PATCH",
                 headers: { "Content-Type": "application/json" },
