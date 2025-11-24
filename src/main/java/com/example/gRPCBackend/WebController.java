@@ -53,6 +53,13 @@ public class WebController {
         log.info("DB 초기화 요청");
         return   ResponseEntity.ok().build();
     }
+    @GetMapping("/listall")
+    public ResponseEntity<String> PlateAllData()
+    {
+        Slogic.listData();
+        log.info("번호판 모든 데이터 요청");
+        return   ResponseEntity.ok().build();
+    }
     @PostMapping("/DiskImage")
     public PlateResultDto SendThImage(@RequestParam("image")MultipartFile image , @RequestParam("mode") String Mode) throws IOException
     {

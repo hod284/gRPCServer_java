@@ -55,4 +55,9 @@ public class ServiceLogic {
     {
          RepoManager.ClearDB();
     }
+    @Transactional
+    public void listData()
+    {
+        RepoManager.getListDB();
+    }
 }

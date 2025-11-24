@@ -92,11 +92,16 @@ sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 
         const res = yield fetch(`/api/${input.value}`);
         const data = yield res.json();
         console.log("받은 데이터:", data);
-        rv.innerHTML = `
+        if (data.license_plate === null || data.license_plate.value === "") {
+            alert("번호판 데이터가 없습니다");
+        }
+        else {
+            rv.innerHTML = `
                 <h2>번호판: ${data.license_plate}</h2>
                 <h2>벌점 :${data.bad_point}</h2>
                 <h2>운전자: ${data.driver_owner}</h2>
             `;
+        }
     }
     catch (e) {
         console.log(e);
@@ -119,6 +124,29 @@ sqlSendButtons_Removeall.addEventListener("click", () => __awaiter(this, void 0,
     catch (e) {
         console.log(e);
         alert("초기화요청 실패");
+    }
+}));
+const sqlSendButtonslist = document.getElementById("sql-send-btnlist");
+sqlSendButtonslist.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
+    try {
+        const res = yield fetch(`/api/listall`);
+        const data = yield res.json();
+        data.forEach(plates => {
+            const li = document.createElement("li");
+            li.textContent = plates;
+            const rv = document.getElementById("ResultView");
+            rv.appendChild(li);
+        });
+        if (!res.ok) {
+            throw new Error(yield res.text());
+        }
+        else {
+            alert("리스트 가져오기 완료");
+        }
+    }
+    catch (e) {
+        console.log(e);
+        alert("리스트 실패 실패");
     }
 }));
 const sqlSendButtons_Post = document.getElementById("sql-send-btn_post");

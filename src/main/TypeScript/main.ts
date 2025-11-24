@@ -100,11 +100,17 @@ let selectFile: File | null = null;
            const res =await fetch(`/api/${input.value}`);
            const data = await res.json();
            console.log("받은 데이터:", data);
-           rv.innerHTML = `
+           if(data.license_plate === null || data.license_plate.value ==="")
+           {
+               alert("번호판 데이터가 없습니다");
+           }
+           else {
+               rv.innerHTML = `
                 <h2>번호판: ${data.license_plate}</h2>
                 <h2>벌점 :${data.bad_point}</h2>
                 <h2>운전자: ${data.driver_owner}</h2>
             `;
+           }
        }
        catch (e)
        {
@@ -133,6 +139,33 @@ sqlSendButtons_Removeall.addEventListener("click", async () =>{
     {
         console.log(e);
         alert("초기화요청 실패");
+    }
+});
+const sqlSendButtonslist= document.getElementById("sql-send-btnlist") as HTMLButtonElement;
+sqlSendButtonslist.addEventListener("click", async () =>{
+    try
+    {
+        const res =await fetch(`/api/listall`);
+        const data = await res.json();
+        data.forEach( plates => {
+            const li = document.createElement("li") as HTMLElement;
+             li.textContent = plates;
+            const rv = document.getElementById("ResultView") as HTMLElement;
+            rv.appendChild(li);
+        });
+        if(!res.ok)
+        {
+            throw new Error(await res.text());
+        }
+        else
+        {
+            alert("리스트 가져오기 완료");
+        }
+    }
+    catch (e)
+    {
+        console.log(e);
+        alert("리스트 실패 실패");
     }
 });
     const sqlSendButtons_Post = document.getElementById("sql-send-btn_post") as HTMLButtonElement;

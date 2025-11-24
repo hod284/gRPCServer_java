@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 @Slf4j
 @Repository
@@ -35,7 +36,15 @@ public class RepositryManager {
         log.info("DB 초기화");
         JdbcTem.update("TRUNCATE TABLE carinformation");
     }
-
+    public List<String> getListDB()
+    {
+        log.info("DB 리스트 받기");
+        String sql = "SELECT license_plate FROM carinformation";
+        return JdbcTem.query(
+                sql,
+                (rs, rowNum)->rs.getString("license_plate")
+        );
+    }
    public RepositryDTO SendtheInfotoClient( String LicenseplateNumber)
    {
        log.info("DB 정보 가져오기");
