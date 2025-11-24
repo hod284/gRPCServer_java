@@ -46,6 +46,13 @@ public class WebController {
         // 웹한테 성공했다고 보내주는 것
         return   ResponseEntity.ok().build();
     }
+    @DeleteMapping("/Removeall")
+    public ResponseEntity<RepositryDTO> RemoveAllData(@RequestBody RepositryDTO repo)
+    {
+        Slogic.ClearData();
+        log.info("DB 초기화 요청");
+        return   ResponseEntity.ok().build();
+    }
     @PostMapping("/DiskImage")
     public PlateResultDto SendThImage(@RequestParam("image")MultipartFile image , @RequestParam("mode") String Mode) throws IOException
     {

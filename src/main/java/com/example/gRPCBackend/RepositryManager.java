@@ -30,6 +30,11 @@ public class RepositryManager {
         String sql = "INSERT INTO carinformation (license_plate,bad_point,driver_owner) VALUES (?,?,?)";
         JdbcTem.update(sql,repo.getLicense_plate(),repo.getBad_point(),repo.getDriver_owner());
    }
+    public void ClearDB()
+    {
+        log.info("DB 초기화");
+        JdbcTem.update("TRUNCATE TABLE carinformation");
+    }
 
    public RepositryDTO SendtheInfotoClient( String LicenseplateNumber)
    {

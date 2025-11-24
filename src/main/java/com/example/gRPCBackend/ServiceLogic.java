@@ -50,4 +50,9 @@ public class ServiceLogic {
     {
         return RepoManager.SendtheInfotoClient(Licenseplate);
     }
+    @Transactional
+    public void ClearData()
+    {
+         RepoManager.ClearDB();
+    }
 }

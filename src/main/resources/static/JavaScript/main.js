@@ -103,6 +103,22 @@ sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 
         alert("get요청 실패");
     }
 }));
+const sqlSendButtons_Removeall = document.getElementById("sql-send-btn_Removeall");
+sqlSendButtons_Removeall.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
+    try {
+        const res = yield fetch(`/api/Removeall`);
+        if (!res.ok) {
+            throw new Error(yield res.text());
+        }
+        else {
+            alert("db초기화완료");
+        }
+    }
+    catch (e) {
+        console.log(e);
+        alert("초기화요청 실패");
+    }
+}));
 const sqlSendButtons_Post = document.getElementById("sql-send-btn_post");
 sqlSendButtons_Post.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
     const input1 = document.getElementById("sql-number21");

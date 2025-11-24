@@ -113,6 +113,26 @@ let selectFile: File | null = null;
        }
    });
 
+const sqlSendButtons_Removeall = document.getElementById("sql-send-btn_Removeall") as HTMLButtonElement;
+sqlSendButtons_Removeall.addEventListener("click", async () =>{
+    try
+    {
+        const res =await fetch(`/api/Removeall`);
+        if(!res.ok)
+        {
+            throw new Error(await res.text());
+        }
+        else
+        {
+            alert("db초기화완료");
+        }
+    }
+    catch (e)
+    {
+        console.log(e);
+        alert("초기화요청 실패");
+    }
+});
     const sqlSendButtons_Post = document.getElementById("sql-send-btn_post") as HTMLButtonElement;
     sqlSendButtons_Post.addEventListener("click", async () =>{
         const input1 = document.getElementById("sql-number21") as HTMLInputElement;
