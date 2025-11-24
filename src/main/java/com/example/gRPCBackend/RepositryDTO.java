@@ -7,13 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 public class RepositryDTO {
-private String LicensePlate;
-private long BadPoint;
-private String DriveOwner;
+private String license_plate;
+private long bad_point;
+private String drive_owner;
   public RepositryDTO( String LPlate, long BPoint, String DOwner  ) {
-      LicensePlate = LPlate;
-      BadPoint = BPoint;
-      DriveOwner = DOwner;
+      license_plate = LPlate;
+      bad_point= BPoint;
+      drive_owner = DOwner;
   }
 
 }

@@ -20,15 +20,15 @@ public class RepositryManager {
    public void PatchtheInfotoDB(RepositryDTO repo)
    {
        log.info("DB 업데이트");
-        String sql = "UPDATE  Carinformation SET LicensePlate =?,BadPoint =?  WHERE  LicensePlate =?";
-        JdbcTem.update(sql,repo.getLicensePlate(),repo.getBadPoint(),repo.getDriveOwner());
+        String sql = "UPDATE  carinformation SET drive_owner =?,bad_point =?  WHERE  license_plate =?";
+        JdbcTem.update(sql,repo.getLicense_plate(),repo.getBad_point(),repo.getDrive_owner());
    }
 
    public void UpdatetheInfotoDB(RepositryDTO repo)
    {
        log.info("DB 새로운 정보 추가");
-        String sql = "INSERT INTO Carinformation (LicensePlate,BadPoint,DrivateOwner) VALUES (?,?,?)";
-        JdbcTem.update(sql,repo.getLicensePlate(),repo.getBadPoint(),repo.getDriveOwner());
+        String sql = "INSERT INTO carinformation (license_plate,bad_point,drive_owner) VALUES (?,?,?)";
+        JdbcTem.update(sql,repo.getLicense_plate(),repo.getBad_point(),repo.getDrive_owner());
    }
 
    public RepositryDTO SendtheInfotoClient( String LicenseplateNumber)
