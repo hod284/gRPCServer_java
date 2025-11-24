@@ -9,11 +9,11 @@ import lombok.Setter;
 public class RepositryDTO {
 private String license_plate;
 private long bad_point;
-private String drive_owner;
+private String driver_owner;
   public RepositryDTO( String LPlate, long BPoint, String DOwner  ) {
       license_plate = LPlate;
       bad_point= BPoint;
-      drive_owner = DOwner;
+      driver_owner = DOwner;
   }
 
 }
