@@ -57,9 +57,7 @@ Sendbtn.addEventListener("click", () => __awaiter(this, void 0, void 0, function
         }
         const data = yield res.json();
         console.log("파이썬 인식 결과:", data);
-        rv.innerHTML = `
-                <h3>${data.LicensePlate}</h3>
-            `;
+        document.getElementById("platenumber").textContent = data.LicensePlate;
     }
     catch (e) {
         console.log(e);
