@@ -102,7 +102,7 @@ let selectFile: File | null = null;
            console.log("받은 데이터:", data);
            if(data.license_plate.value === null || data.license_plate.value ==="")
            {
-               alert("번호판 데이터가 없습니다");
+               rv.innerHTML = `<h2>데이터가 없습니다 </h2>>`;
            }
            else {
                rv.innerHTML = `
@@ -157,7 +157,10 @@ sqlSendButtonslist.addEventListener("click", async () =>{
         }
         else
         {
-            alert("리스트 없음");
+            const li = document.createElement("li") as HTMLElement;
+            li.textContent = "리스트 없음";
+            const rv = document.getElementById("ResultView") as HTMLElement;
+            rv.appendChild(li);
         }
         if(!res.ok)
         {
