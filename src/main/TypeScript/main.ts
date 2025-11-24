@@ -151,7 +151,7 @@ sqlSendButtonslist.addEventListener("click", async () =>{
         }
         else
         {
-            rv.innerHTML = `<h2>리스트 없음 </h2>>`;
+            rv.innerHTML = `<h2>리스트 없음 </h2>`;
         }
         if(!res.ok)
         {

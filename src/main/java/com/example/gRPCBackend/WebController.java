@@ -26,7 +26,7 @@ public class WebController {
     public ResponseEntity<RepositryDTO> GetDriverInformation(@PathVariable("Lplate") String Licenseplate){
         RepositryDTO  re = Slogic.FindInformation(Licenseplate);
         log.info(re.toString());
-         if(re == null){
+         if(re.getLicense_plate() == null || re.getLicense_plate().isBlank()){
              return ResponseEntity.notFound().build();
          }
         return   ResponseEntity.ok(re);

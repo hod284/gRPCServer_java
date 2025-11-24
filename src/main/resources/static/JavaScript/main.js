@@ -135,7 +135,7 @@ sqlSendButtonslist.addEventListener("click", () => __awaiter(this, void 0, void 
             });
         }
         else {
-            rv.innerHTML = `<h2>리스트 없음 </h2>>`;
+            rv.innerHTML = `<h2>리스트 없음 </h2>`;
         }
         if (!res.ok) {
             throw new Error(yield res.text());
