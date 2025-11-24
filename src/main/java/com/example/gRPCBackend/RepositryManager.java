@@ -21,7 +21,7 @@ public class RepositryManager {
    {
        log.info("DB 업데이트");
         String sql = "UPDATE  carinformation SET driver_owner =?,bad_point =?  WHERE  license_plate =?";
-        JdbcTem.update(sql,repo.getLicense_plate(),repo.getBad_point(),repo.getDriver_owner());
+        JdbcTem.update(sql,repo.getDriver_owner(),repo.getBad_point(),repo.getLicense_plate());
    }
 
    public void UpdatetheInfotoDB(RepositryDTO repo)
