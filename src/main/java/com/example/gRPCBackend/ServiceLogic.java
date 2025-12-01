@@ -16,9 +16,12 @@ import java.util.List;
 public class ServiceLogic {
   private final PlateRecognizerGrpc.PlateRecognizerBlockingStub BStub;
   private RepositryManager RepoManager;
+  // 도커 컴포즈 파일의 환경 테크에 있는 GRPC_HOST라는 아이피가 있으면 사용하고 없으면 그냥 Localhost사용하겠다
+  private String host = System.getenv().getOrDefault("GRPC_HOST", "localhost");
+  private int port = Integer.parseInt(System.getenv().getOrDefault("GRPC_PORT", "50051"));
   public   ServiceLogic(RepositryManager RManager ) {
       ManagedChannel channel = ManagedChannelBuilder
-              .forAddress("localhost", 50051)  // 도커면 서비스 이름:포트
+              .forAddress(host,port)  // 도커면 서비스 이름:포트
               .usePlaintext()
               .build();
 
