@@ -82,7 +82,7 @@ toggleButtons.forEach(btn => {
 const sqlSendButtons_get = document.getElementById("sql-send-btn_get");
 sqlSendButtons_get.addEventListener("click", () => __awaiter(this, void 0, void 0, function* () {
     const input = document.getElementById("sql-number1");
-    const rv = document.getElementById("ResultView");
+    const rv = document.getElementById("ResultView1");
     if (!input.value == null) {
         alert("번호를 입력하세요");
         return;
@@ -130,7 +130,7 @@ sqlSendButtonslist.addEventListener("click", () => __awaiter(this, void 0, void 
             data.forEach(plates => {
                 const li = document.createElement("li");
                 li.textContent = plates;
-                const rv = document.getElementById("ResultView");
+                const rv = document.getElementById("ResultView2");
                 rv.appendChild(li);
             });
         }

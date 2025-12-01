@@ -88,7 +88,7 @@ let selectFile: File | null = null;
    const sqlSendButtons_get = document.getElementById("sql-send-btn_get") as HTMLButtonElement;
    sqlSendButtons_get.addEventListener("click", async () =>{
        const input = document.getElementById("sql-number1") as HTMLInputElement;
-       const rv = document.getElementById("ResultView") as HTMLElement;
+       const rv = document.getElementById("ResultView1") as HTMLElement;
        if(!input.value == null)
        {
            alert("번호를 입력하세요");
@@ -145,7 +145,7 @@ sqlSendButtonslist.addEventListener("click", async () =>{
             data.forEach(plates => {
                 const li = document.createElement("li") as HTMLElement;
                 li.textContent = plates;
-                const rv = document.getElementById("ResultView") as HTMLElement;
+                const rv = document.getElementById("ResultView2") as HTMLElement;
                 rv.appendChild(li);
             });
         }
