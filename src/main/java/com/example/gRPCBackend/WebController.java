@@ -72,7 +72,7 @@ public class WebController {
         PlateRecognizerOuterClass.PlateResponse response = Slogic.Recongize(bytes,mode);
         log.info(response.toString());
         log.info("gRPC요청" );
-         String query = "SELECT 1 FROM carinformation WHERE license_plate = ?";
+         String query = "SELECT EXISTS (SELECT 1 FROM carinformation WHERE license_plate = ?)";
          boolean exits  = JdbcTem.queryForObject(query,boolean.class, response.getPlateNumber());         
         if(!exits)
         {
