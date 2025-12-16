@@ -17,7 +17,7 @@ public class DatabaseInitiallzer {
         String sql = """
             CREATE TABLE IF NOT EXISTS carinformation (
                 id SERIAL PRIMARY KEY,
-                plate_number VARCHAR(20) NOT NULL,
+                license_plate VARCHAR(20) NOT NULL,
                 bad_point BIGINT,
                 driver_owner VARCHAR(255)
             )

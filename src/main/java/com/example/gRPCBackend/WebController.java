@@ -2,6 +2,7 @@ package com.example.gRPCBackend;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import plate.PlateRecognizerOuterClass;
@@ -14,9 +15,11 @@ import java.util.List;
 public class WebController {
 
     private  ServiceLogic Slogic;
+ private JdbcTemplate JdbcTem;
 
-    public   WebController(ServiceLogic Serlogic) {
+    public   WebController(ServiceLogic Serlogic, JdbcTemplate Jdbc) {
         Slogic = Serlogic;
+        JdbcTem = Jdbc;   
     }
 
 
@@ -69,6 +72,16 @@ public class WebController {
         PlateRecognizerOuterClass.PlateResponse response = Slogic.Recongize(bytes,mode);
         log.info(response.toString());
         log.info("gRPC요청" );
+         String query = "SELECT 1 FROM carinformation WHERE license_plate = ?";
+         boolean exits  = JdbcTem.queryForObject(query,boolean.class, response.getPlateNumber());         
+        if(!exits)
+        {
+            RepositryDTO repo = new RepositryDTO(
+                    response.getPlateNumber(),
+                    0,
+                    "");
+             Slogic.UpdateDate(repo);
+        }
         return new PlateResultDto(
                 response.getPlateNumber()
         );
