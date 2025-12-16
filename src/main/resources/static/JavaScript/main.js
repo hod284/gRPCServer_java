@@ -126,12 +126,13 @@ sqlSendButtonslist.addEventListener("click", () => __awaiter(this, void 0, void 
     try {
         const res = yield fetch(`/api/listall`);
         const data = yield res.json();
+        const rv = document.getElementById("ResultView2");
+        if (rv && rv.children && rv.children.length > 0)
+            rv.innerHTML = "";
         if (data.length > 0) {
             data.forEach(plates => {
                 const li = document.createElement("li");
                 li.textContent = plates;
-                const rv = document.getElementById("ResultView2");
-                rv.remove();
                 rv.appendChild(li);
             });
         }

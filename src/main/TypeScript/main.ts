@@ -141,12 +141,13 @@ sqlSendButtonslist.addEventListener("click", async () =>{
     {
         const res =await fetch(`/api/listall`);
         const data = await res.json();
+        const rv = document.getElementById("ResultView2") as HTMLElement;
+        if(rv && rv.children &&rv.children.length>0)
+            rv.innerHTML="";
         if(data.length>0) {
             data.forEach(plates => {
                 const li = document.createElement("li") as HTMLElement;
                 li.textContent = plates;
-                const rv = document.getElementById("ResultView2") as HTMLElement;
-                rv.remove();
                 rv.appendChild(li);
             });
         }
