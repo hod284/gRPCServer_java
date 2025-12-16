@@ -146,6 +146,7 @@ sqlSendButtonslist.addEventListener("click", async () =>{
                 const li = document.createElement("li") as HTMLElement;
                 li.textContent = plates;
                 const rv = document.getElementById("ResultView2") as HTMLElement;
+                rv.remove();
                 rv.appendChild(li);
             });
         }
